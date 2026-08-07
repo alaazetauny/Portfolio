@@ -1,7 +1,10 @@
 import React from "react";
 import { Animate } from "react-simple-animate";
 import { BsInfoCircleFill } from "react-icons/bs";
+import { DiApple, DiAndroid } from "react-icons/di";
+import { FaDev, FaDatabase } from "react-icons/fa";
 import PageHeaderContent from "../../components/pageHeaderContent";
+import "./styles.scss";
 
 const personalDetails = [
   {
@@ -36,8 +39,35 @@ const About = () => {
         icon={<BsInfoCircleFill size={40} />}
       />
       <div className="about__content">
-        <h3>Full Stack Developer</h3>
-        <p>{jobSummary}</p>
+        <div className="about__content__personalWrapper">
+          <h3>Full Stack Developer</h3>
+          <p>{jobSummary}</p>
+          <h3 className="personalInformation">Personal Information</h3>
+          <ul>
+            {personalDetails.map((item, index) => (
+              <li key={index}>
+                <span className="title">{item.label}</span>
+                <span className="value">{item.value}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="about__content__servicesWrapper">
+          <div className="about__content__servicesWrapper__innerContent">
+            <div>
+              <FaDev size={60} color="var(--yellow-theme-main-color)" />
+            </div>
+            <div>
+              <DiAndroid size={60} color="var(--yellow-theme-main-color)" />
+            </div>
+            <div>
+              <FaDatabase size={60} color="var(--yellow-theme-main-color)" />
+            </div>
+            <div>
+              <DiApple size={60} color="var(--yellow-theme-main-color)" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

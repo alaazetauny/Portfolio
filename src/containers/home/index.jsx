@@ -1,6 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles.scss";
 const Home = () => {
+  const navigate = useNavigate();
+  const handleNavigateToContactMePage = () => {
+    navigate("./contact");
+  };
   return (
     <section id="home" className="home">
       <div className="home__text-wrapper">
@@ -10,7 +15,7 @@ const Home = () => {
           Full Stack developer
         </h1>
       </div>
-      <div className="home__contact-me">
+      <div onClick={handleNavigateToContactMePage} className="home__contact-me">
         <button>Hiere Me</button>
       </div>
     </section>
