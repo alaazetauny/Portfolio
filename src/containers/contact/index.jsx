@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import PageHeaderContent from "../../components/pageHeaderContent";
 import { BsInfoCircleFill } from "react-icons/bs";
 import "./styles.scss";
 
 const Contact = () => {
+  const form = useRef();
+  const [status, setStatus] = useState("");
+
+  const sendEmail = (event) => {
+    event.preventDefault();
+
+    emailjs
+      .sendForm("service_xxx", "template_xxx", form.current, "public_key_xxx")
+      .then(
+        () => {
+          setStatus("Nachricht erfolgreich gesendet!");
+          form.current.reset();
+        },
+        () => {
+          setStatus("Etwas ist schiefgelaufen. Bitte versuche es erneut.");
+        },
+      );
+  };
+
   return (
     <section id="contact" className="contact">
       <PageHeaderContent
@@ -15,13 +35,9 @@ const Contact = () => {
 
         <form
           className="contact__content__form"
-          action="https://formsubmit.co/alaachz.83@gmail.com"
-          method="POST"
+          ref={form}
+          onSubmit={sendEmail}
         >
-          <input type="hidden" name="_subject" value="Neue Kontaktanfrage" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
-
           <div className="contact__content__form__controlswrapper">
             <div>
               <input
@@ -61,6 +77,7 @@ const Contact = () => {
             </div>
           </div>
           <button type="submit">Submit</button>
+          {status && <p className="contact__status">{status}</p>}
         </form>
       </div>
     </section>
